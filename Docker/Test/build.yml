@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  userserver:
+    image: dulce/user-server:test
+    build:
+      context: ../../
+      dockerfile: Docker/Test/Server/Dockerfile
+
+  userclient:
+    image: dulce/user-client:test
+    build:
+      context: ../../
+      dockerfile: Docker/Test/Client/Dockerfile

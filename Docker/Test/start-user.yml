@@ -1,0 +1,38 @@
+version: '3.5'
+
+services:
+  userserver:
+    image: dulce/user-server:test
+    restart: always
+    env_file:
+      - ./env/mongo.env
+      - ./env/rabbitmq.env
+    ports:
+      - 8080:8080
+    volumes:
+      - ../../Server:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - dulce-db
+      - dulce-rabbitmq
+
+  userclient:
+    image: dulce/user-client:test
+    restart: always
+    env_file:
+      - ./env/rabbitmq.env
+    ports:
+      - 8083:8080
+    volumes:
+      - ../../Client:/usr/src/app
+      - ./test.sh:/usr/src/app/test.sh
+      - /usr/src/app/node_modules
+    networks:
+      - dulce-rabbitmq
+    command: bash -c "cd /usr/src/app  && ls && chmod +x test.sh && ./test.sh"
+
+networks:
+  dulce-db:
+    name: dulce-db
+  dulce-rabbitmq:
+    name: dulce-rabbitmq
