@@ -1,3 +1,4 @@
+
 # User
 
 Microsserviços de gerenciamento de usuário
@@ -10,3 +11,4 @@ $ sudo docker-compose -f start-user.yml up -d
 $ sudo docker-compose -f start-user.yml logs -f  
 
 Os servidores rodarão em Background. Para visualizar o processo, basta rodar sem a flag -d
+
