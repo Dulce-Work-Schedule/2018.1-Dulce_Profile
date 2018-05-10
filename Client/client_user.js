@@ -59,3 +59,4 @@ var seneca = require('seneca')()
             console.log('here eye am')
             app.listen(8080)
       })
+module.exports = app
