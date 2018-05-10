@@ -29,7 +29,6 @@ matrix:
         - cd $TRAVIS_BUILD_DIR/Docker/Test
         - sudo docker-compose -f build.yml build
         - sudo docker-compose -f start-user.yml up -d
-
-
       script:
-        - cd 2018.1-Dulce_User/Docker/Test
+        - cd $TRAVIS_BUILD_DIR/Client && npm install && npm run test; cd ..
+        - cd $TRAVIS_BUILD_DIR/Server && npm install && npm run test; cd ..
