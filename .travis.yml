@@ -10,8 +10,8 @@ cache:
   directories:
     - "node_modules"
 script:
-  - npm install -g
-  - npm run lint
+  - sudo npm install -g
+  - sudo npm run lint
 matrix:
   include:
     - language: node_js
@@ -23,12 +23,13 @@ matrix:
         - docker version
 
       install:
-        - npm install
+        - sudo npm install
 
       before_script:
         - cd $TRAVIS_BUILD_DIR/Docker/Test
         - sudo docker-compose -f build.yml build
-        - sudo docker-compose -f start-user.yml up -d
+        
       script:
-        - cd $TRAVIS_BUILD_DIR/Client && npm install && npm run test; cd ..
-        - cd $TRAVIS_BUILD_DIR/Server && npm install && npm run test; cd ..
+        - cd $TRAVIS_BUILD_DIR/Server && sudo npm install && sudo npm run test; cd ..
+
+      after_success: sudo npm run coverage
