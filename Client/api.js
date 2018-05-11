@@ -8,7 +8,6 @@ module.exports = function api(options) {
     var hospital = msg.args.body.hospital
     var password = msg.args.body.password
     var manager = msg.args.body.manager
-    var id = msg.args.query.id
 
     this.act('role:user,cmd:create', {
       name: name,
@@ -16,8 +15,7 @@ module.exports = function api(options) {
       sector: sector,
       hospital: hospital,
       password: password,
-      manager: manager,
-      id: id
+      manager: manager
     }, respond)
   })
 
