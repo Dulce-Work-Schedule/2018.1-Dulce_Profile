@@ -11,7 +11,7 @@ module.exports = function(options){
     user.manager = msg.manager
 
     user.save$(function(err,user){
-      respond( null, user)
+      respond(null, user)
     })
   })
 
