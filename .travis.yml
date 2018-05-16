@@ -26,4 +26,4 @@ matrix:
         - sudo docker exec -it test_userserver_1 npm run cover
 
       after_success:
-        - npm run coverage
+        - sudo docker exec -it test_userserver_1 npm run coverage
