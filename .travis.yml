@@ -26,4 +26,4 @@ matrix:
         - sudo docker exec -it test_userserver_1 npm run cover
 
       after_success:
-        - sudo docker exec -it test_userserver_1 npm run coverage
+        - sudo docker exec -it -e COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN} test_userserver_1 npm run coverage
