@@ -1,1 +1,29 @@
 language: node_js
+node_js:
+  - "8"
+env:
+  - DOCKER_COMPOSE_VERSION=1.21.0
+services:
+  - docker
+cache:
+  directories:
+    - "node_modules"
+matrix:
+  include:
+    - language: node_js
+      os: linux
+      before_install:
+        - sudo curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+        - sudo chmod +x /usr/local/bin/docker-compose
+        - docker-compose version
+        - docker version
+
+      before_script:
+        - cd $TRAVIS_BUILD_DIR/Docker/Test
+        - sudo docker-compose -f build.yml build
+        - sudo docker-compose -f start-deps.yml up -d
+        - sudo docker-compose -f start-user.yml up -d
+        - sudo docker exec -it test_userserver_1 npm run cover
+
+      after_success:
+        - npm run coverage

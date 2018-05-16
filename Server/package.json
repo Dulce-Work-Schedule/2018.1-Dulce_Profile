@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon user.js",
     "test": "nyc --reporter=html --reporter=text mocha",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "cover": "istanbul cover _mocha"
   },
   "author": "",
   "license": "MIT",
@@ -30,6 +31,7 @@
     "coveralls": "^3.0.1",
     "istanbul": "^0.4.5",
     "mocha": "^5.0.5",
+    "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^11.7.3",
     "should": "^13.2.1",
     "supertest": "^3.0.0"
