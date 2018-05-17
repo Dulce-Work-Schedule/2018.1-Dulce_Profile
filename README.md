@@ -1,16 +1,16 @@
 ### Para mais informações visite nossa página [dulce](https://fga-gpp-mds.github.io/2018.1-Dulce_App/index.html)
 # User
 ![Build Status](https://travis-ci.org/Dulce-Work-Schedule/2018.1-Dulce_User.svg?branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/Dulce-Work-Schedule/2018.1-Dulce_User/badge.svg?branch=)](https://coveralls.io/github/Dulce-Work-Schedule/2018.1-Dulce_User?branch=)
+[![Coverage Status](https://coveralls.io/repos/github/Dulce-Work-Schedule/2018.1-Dulce_User/badge.svg?branch=)](https://coveralls.io/github/Dulce-Work-Schedule/2018.1-Dulce_User?branch=master)
 
 ### Microsserviços de gerenciamento de usuário
 
 Para contribuir com esse mircosserviço você deve seguir as seguintes instruções:  
 
-###### 1 - Primeiro leia o nosso [guia de contribuição](CONTRIBUTING.md) onde são explicados todos os passos para contribuir. Ahh, não esquece de ler nosso [código de conduta](CODE_OF_CONDUCT.md).   
+#### 1 - Primeiro leia o nosso [guia de contribuição](CONTRIBUTING.md) onde são explicados todos os passos para contribuir. Ahh, não esquece de ler nosso [código de conduta](CODE_OF_CONDUCT.md).   
 Caso reste duvidas você também pode entrar em contato conosco criando uma issue ou pelo email dulce.application@gmail.com.  
 
-###### 2 - Em seguida siga os comandos para executar o ambiente de produção:  
+#### 2 - Em seguida siga os comandos para executar o ambiente de produção:  
 
 ```bash
 $ cd 2018.1-Dulce_User/Docker/Dev
