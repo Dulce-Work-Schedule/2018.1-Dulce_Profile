@@ -46,7 +46,7 @@ buck-out/
 # project
 package-lock.json
 coverage/
-.coveralls.yml
+**.coveralls.yml
 **.nyc_output/
 
 # fastlane
