@@ -1,6 +1,7 @@
 ### Para mais informações visite nossa página [dulce](https://fga-gpp-mds.github.io/2018.1-Dulce_App/index.html)
 # User
 ![Build Status](https://travis-ci.org/Dulce-Work-Schedule/2018.1-Dulce_User.svg?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/01b319bb89eb74d039dc/maintainability)](https://codeclimate.com/github/Dulce-Work-Schedule/2018.1-Dulce_User/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/Dulce-Work-Schedule/2018.1-Dulce_User/badge.svg?branch=)](https://coveralls.io/github/Dulce-Work-Schedule/2018.1-Dulce_User?branch=master)
 
 ### Microsserviços de gerenciamento de usuário
