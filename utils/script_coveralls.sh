@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}" > ../Docker/Test/env/coveralls.env && exit 0
+repo=$(git rev-parse --show-toplevel)
+echo "COVERALLS_REPO_TOKEN=${COVERALLS_REPO_TOKEN}" > ${repo}/Docker/Test/env/coveralls.env && exit 0
