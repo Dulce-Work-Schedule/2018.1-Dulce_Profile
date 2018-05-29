@@ -56,7 +56,6 @@ var seneca = require('seneca')()
         url: 'amqp://' + process.env.RABBITMQ_HOST
     })
     .ready(() => {
-        console.log('Manga')
         app.listen(8080)
     })
 
