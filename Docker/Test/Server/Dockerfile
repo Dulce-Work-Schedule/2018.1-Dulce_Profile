@@ -1,9 +1,11 @@
 FROM dulce/dulce:base-dev
 
-COPY Server/package.json /usr/src/app/package.json
+WORKDIR /usr/src/app
 
-RUN npm install --development
+ADD Server/package.json /usr/src/app/
 
-EXPOSE 8080
+RUN npm install
 
-CMD ["npm", "start"]
+ADD  Server /usr/src/app
+
+CMD ["npm", "run", "coverage"]
