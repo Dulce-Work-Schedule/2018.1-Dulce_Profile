@@ -18,3 +18,9 @@ before_script:
 
 script:
   - sudo docker-compose -f start-user.yml up
+
+deploy:
+  provider: script
+  script: bash utils/deploy.sh
+  on:
+    branch: master
