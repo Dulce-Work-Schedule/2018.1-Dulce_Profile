@@ -17,7 +17,7 @@ before_script:
   - sudo docker-compose -f build.yml build
 
 script:
-  - sudo docker-compose -f start-user.yml up
+  - sudo docker-compose -f start-user.yml run userserver npm run coverage
   - cd $TRAVIS_BUILD_DIR
 
 deploy:
