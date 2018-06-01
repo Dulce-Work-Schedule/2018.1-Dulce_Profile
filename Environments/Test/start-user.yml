@@ -5,7 +5,7 @@ services:
     image: dulce/user-server:test
     restart: always
     env_file:
-      - ./env/coveralls.env
+      - ./Variables/coveralls.env
     ports:
       - 8080:8080
     volumes:
