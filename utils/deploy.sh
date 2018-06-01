@@ -2,7 +2,7 @@
 
 echo Deploying ...
 
-cd $TRAVIS_BUILD_DIR/Docker/Dev
+cd $TRAVIS_BUILD_DIR/Environments/Production
 sudo docker-compose -f build.yml build
 sudo docker login --username=$DOCKERHUB_USER --password=$DOCKERHUB_PASSWORD
 sudo docker push dulce/user-client:dev

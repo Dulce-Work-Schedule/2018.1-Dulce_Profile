@@ -5,8 +5,8 @@ services:
     image: dulce/user-server:dev
     restart: always
     env_file:
-      - ./env/mongo.env
-      - ./env/rabbitmq.env
+      - ./Variables/mongo.env
+      - ./Variables/rabbitmq.env
     ports:
       - 8080:8080
     volumes:
@@ -20,7 +20,7 @@ services:
     image: dulce/user-client:dev
     restart: always
     env_file:
-      - ./env/rabbitmq.env
+      - ./Variables/rabbitmq.env
     ports:
       - 8083:8080
     volumes:

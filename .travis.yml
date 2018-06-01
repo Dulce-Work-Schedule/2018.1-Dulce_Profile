@@ -13,7 +13,7 @@ before_install:
   - docker version
 before_script:
   - ./utils/script_coveralls.sh
-  - cd $TRAVIS_BUILD_DIR/Docker/Test
+  - cd $TRAVIS_BUILD_DIR/Environments/Test
   - sudo docker-compose -f build.yml build
 
 script:
