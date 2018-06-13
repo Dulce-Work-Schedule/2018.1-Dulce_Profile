@@ -34,6 +34,15 @@ module.exports = function api(options) {
 
   });
 
+  this.add('role:api,path:loginUser', function(msg, respond){
+    var username = msg.args.body.username
+    var password = msg.args.body.password
+
+    this.act('role:user, cmd:loginUser',{}, respond)
+      username: username,
+      password: password,
+  });
+
   this.add('role:api,path:error', function(msg, respond){
     this.act('role:user, cmd:error',{}, respond)
 
@@ -81,6 +90,12 @@ this.add('role:api,path:editUser', function(msg, respond){
                     }
         },
         editUser: { PUT: true,
+                    auth: {
+                      strategy: 'jwt',
+                      fail: '/api/userManager/error',
+                    }
+        },
+        loginUser: { POST: true,
                     auth: {
                       strategy: 'jwt',
                       fail: '/api/userManager/error',

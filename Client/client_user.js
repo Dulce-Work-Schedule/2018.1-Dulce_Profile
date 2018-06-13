@@ -35,6 +35,34 @@ var app = express()
     .use(Passport.initialize())
     .use(context)
 
+// app.enable('trust proxy')
+// app.use(Express.cookieParser())
+//   .use(Express.query())
+//   .use(Express.bodyParser())
+//   .use(Express.methodOverride())
+//   .use(Express.json())
+//   .use(Express.session({secret: 'seneca'}))
+//   .use(Express.static(__dirname + '/public'))
+
+    // add any middleware provided by seneca plugins
+    // app.use(seneca.export('web'))
+
+
+    // some express views
+    // app.engine('ejs', require('ejs-locals'))
+    //     .set('views', __dirname + '/views')
+    //     .set('view engine', 'ejs')
+
+    // app.get('/login', function (req, res) {
+    //   res.render('login.ejs', {})
+    // })
+
+    // when rendering the account page, use the req.seneca.user object
+    // to get user details. This is automatically set up by the auth plugin
+    // app.get('/account', function (req, res) {
+    //   res.render('account.ejs', { locals: { user: req.seneca.user } })
+    // })
+
 var senecaWebConfig = {
     context: context,
     adapter: require('seneca-web-adapter-express'),

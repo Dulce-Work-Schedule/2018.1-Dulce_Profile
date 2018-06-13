@@ -34,9 +34,14 @@ module.exports = function(options){
 
   })
 
-  .add('role:user, cmd:error', function error(msg, respond){
+  this.add('role:user, cmd:error', function error(msg, respond){
     respond(null, {success:false, message: 'acesso negado'});
   })
+
+  this.add('role:user, cmd:loginUser', function error(msg, respond){
+    respond(null, msg.seneca.user);
+  })
+
 
   this.add('role:user, cmd:editUser', function(msg, respond){
 
