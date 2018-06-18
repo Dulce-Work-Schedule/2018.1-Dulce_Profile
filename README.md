@@ -1,4 +1,4 @@
-[<img src="Docs/dulceLogo/DulceHorizontal.svg" width="1300" title="">](https://dulce-work-schedule.github.io/)
+[<img src="Docs/DulceHorizontal.svg" width="1300" title="">](https://dulce-work-schedule.github.io/)
 # Dulce User
 ![Build Status](https://travis-ci.org/Dulce-Work-Schedule/2018.1-Dulce_User.svg?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/01b319bb89eb74d039dc/maintainability)](https://codeclimate.com/github/Dulce-Work-Schedule/2018.1-Dulce_User/maintainability)
