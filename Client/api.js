@@ -110,26 +110,69 @@ module.exports = function api(options) {
 
   });
 
-this.add('role:api,path:editUser', function(msg, respond){
+this.add('role:api,path:edit', function(msg, respond){
+  var sector_id = {
+    verbose: 'Setor',
+    field_name: 'sector_id'
+  }
+  var user_id = {
+    verbose: 'Usuário',
+    field_name: 'user_id'
+  }
+  var hospital_id = {
+    verbose: 'Hospital',
+    field_name: 'hospital_id'
+  }
+  var registration = {
+    verbose: 'Matricula',
+    field_name: 'registration'
+  }
+  var user_type = {
+    verbose: 'Tipo de usuário',
+    field_name: 'user_type'
+  }
+  var speciality = {
+    verbose: 'Especialidade',
+    field_name: 'speciality'
+  }
+  var profile_id = {
+    verbose: 'Perfil',
+    field_name: 'profile_id'
+  }
+  var result = {}
+  speciality.value = msg.args.body.speciality
+  user_type.value = msg.args.body.user_type
+  registration.value = msg.args.body.registration
+  user_id.value = msg.args.body.user_id
+  hospital_id.value = msg.args.body.hospital_id
+  sector_id.value = msg.args.body.sector_id
+  profile_id.value = msg.args.body.profile_id
 
-  var name = msg.args.body.name
-  var registration = msg.args.body.registration
-  var sector = msg.args.body.sector
-  var hospital = msg.args.body.hospital
-  var password = msg.args.body.password
-  var manager = msg.args.body.manager
-  var id = msg.args.query.id
+  result = validate_user_type(user_type, result)
+  result = validate_field(registration, result)
+  result = validate_field(speciality, result)
+  result = validate_id(sector_id, result)
+  result = validate_id(hospital_id, result)
+  result = validate_id(profile_id, result)
+  result = validate_id(user_id, result)
 
-  this.act('role:profile, cmd:editUser', {
-    name: name,
-    registration: registration,
-    sector: sector,
-    hospital: hospital,
-    password: password,
-    manager: manager,
-    id: id
-  }, respond)
-
+  if (Object.entries(result)[0]) {
+    console.log("Result:");
+    console.log(result);
+    result.success = false;
+    respond(null, result)
+  // else, everything sucess
+  } else {
+    this.act('role:profile, cmd:edit', {
+      registration: registration.value,
+      user_type: user_type.value,
+      speciality: speciality.value,
+      user_id: user_id.value,
+      sector_id: sector_id.value,
+      hospital_id: hospital_id.value,
+      profile_id: profile_id.value
+    }, respond)
+  }
 });
 
   this.add('init:api', function (msg, respond) {
@@ -151,12 +194,7 @@ this.add('role:api,path:editUser', function(msg, respond){
                       fail: '/api/profile/error',
                     }
         },
-        editUser: { PUT: true,
-                    auth: {
-                      strategy: 'jwt',
-                      fail: '/api/profile/error',
-                    }
-        },
+        edit: { PUT: true },
         error: {GET:true}
       }
     }}, respond)
