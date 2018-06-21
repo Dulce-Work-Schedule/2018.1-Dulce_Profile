@@ -18,28 +18,36 @@ module.exports = function(options){
     })
   })
 
-  this.add('role:profile, cmd:listById', function listById (msg, respond){
+//##############################################################################
 
-    var profile_id = msg.id;
+  this.add('role:profile, cmd:list', async function list (msg, respond){
+    result = {};
     var profile = this.make('profiles')
-    profile.load$(profile_id, function(error, profile) {
+    var user_id = msg.user_id;
+    console.log(msg);
+
+    var list$ = Promise.promisify(profile.list$, { context: profile });
+
+    list$({user_id:user_id})
+    .then(function(profile){
+      console.log("profile"+profile);
       respond(null, profile);
-    });
+    })
+    .catch(function(error){
+      result.user_not_found_error = "Usuário não possui nenhum perfil"
+      result.success = "false"
+      console.log("result"+result);
+      respond(null, result)
+    })
   })
 
-  this.add('role:profile, cmd:listUser', function listUser(msg, respond){
+//##############################################################################
 
-    var profile = this.make('profiles');
-    profile.list$( { all$: true } , function(error, profile){
-      respond(null, profile);
-    });
-
-
-  })
-
-  .add('role:profile, cmd:error', function error(msg, respond){
+  this.add('role:profile, cmd:error', function error(msg, respond){
     respond(null, {success:false, message: 'acesso negado'});
   })
+
+//##############################################################################
 
   this.add('role:profile, cmd:edit', async function(msg, respond){
     var profile = this.make('profiles')
@@ -67,6 +75,5 @@ module.exports = function(options){
       respond(null, result)
     })
   })
-
 
 }
