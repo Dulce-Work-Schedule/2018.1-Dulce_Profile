@@ -43,6 +43,29 @@ module.exports = function(options){
 
 //##############################################################################
 
+  this.add('role:profile, cmd:view', async function list (msg, respond){
+    result = {};
+    var profile = this.make('profiles')
+    var profile_id = msg.profile_id;
+    console.log(msg);
+
+    var list$ = Promise.promisify(profile.list$, { context: profile });
+
+    list$({id:profile_id})
+    .then(function(profile){
+      console.log("profile"+profile);
+      respond(null, profile[0]);
+    })
+    .catch(function(error){
+      result.profile_not_found_error = "Perfil não encontrado"
+      result.success = "false"
+      console.log("result"+result);
+      respond(null, result)
+    })
+  })
+
+//##############################################################################
+
   this.add('role:profile, cmd:error', function error(msg, respond){
     respond(null, {success:false, message: 'acesso negado'});
   })
