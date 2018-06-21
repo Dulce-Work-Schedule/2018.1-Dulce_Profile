@@ -21,12 +21,12 @@ var strategy = new JwtStrategy(jwtOptions, async function(payload, next) {
 
 Passport.use(strategy)
 
-Passport.serializeUser((user, cb) => {
-    cb(null, user)
+Passport.serializeUser((profile, cb) => {
+    cb(null, profile)
 })
 
-Passport.deserializeUser((user, cb) => {
-    cb(null, user)
+Passport.deserializeUser((profile, cb) => {
+    cb(null, profile)
 })
 
 
@@ -49,7 +49,7 @@ var seneca = require('seneca')()
     .use('api')
     .client({
         type: 'amqp',
-        pin: 'role:user',
+        pin: 'role:profile',
         port: process.env.RABBITMQ_PORT,
         username: process.env.RABBITMQ_DEFAULT_USER,
         password: process.env.RABBITMQ_DEFAULT_PASS,
