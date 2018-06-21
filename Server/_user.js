@@ -1,3 +1,4 @@
+var Promise = require('bluebird');
 module.exports = function(options){
   this.add('role:profile, cmd:create', function create( msg, respond ) {
     var profile = this.make('profiles')
@@ -19,9 +20,9 @@ module.exports = function(options){
 
   this.add('role:profile, cmd:listById', function listById (msg, respond){
 
-    var profileId = msg.id;
+    var profile_id = msg.id;
     var profile = this.make('profiles')
-    profile.load$(profileId, function(error, profile) {
+    profile.load$(profile_id, function(error, profile) {
       respond(null, profile);
     });
   })
@@ -40,24 +41,31 @@ module.exports = function(options){
     respond(null, {success:false, message: 'acesso negado'});
   })
 
-  this.add('role:profile, cmd:editUser', function(msg, respond){
-
-    var profileId = msg.id;
+  this.add('role:profile, cmd:edit', async function(msg, respond){
     var profile = this.make('profiles')
+    var profile_id = msg.profile_id;
+    result = {};
 
-    profile.load$(profileId, function(error, profile) {
+    var load$ = Promise.promisify(profile.load$, { context: profile });
 
-      profile.name = msg.name
+    await load$(profile_id)
+    .then(function(profile){
       profile.registration = msg.registration
-      profile.sector = msg.sector
-      profile.hospital = msg.hospital
-      profile.password = msg.password
-      profile.manager = msg.manager
-
+      profile.user_type = msg.user_type
+      profile.speciality = msg.speciality
+      profile.user_id = msg.user_id
+      profile.sector_id = msg.sector_id
+      profile.hospital_id = msg.hospital_id
       profile.save$(function(err,profile){
         respond( null, profile)
       });
-    });
+    })
+    .catch(function(error){
+      result.not_find_error = "Perfil não encontrado";
+      result.success = "false";
+      console.log("Perfil não encontrado");
+      respond(null, result)
+    })
   })
 
 
