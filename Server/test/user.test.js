@@ -23,14 +23,14 @@ describe('Create user', function() {
       cmd: 'create',
       registration : "123456",
       user_type : "123456",
-      medical_speciality : "123456",
+      speciality : "123456",
       user_id : "123456",
       sector_id : "123456",
       hospital_id : "123456"
     }, function(err, result){
       expect(result.registration).to.equal('123456')
       expect(result.user_type).to.equal('123456')
-      expect(result.medical_speciality).to.equal('123456')
+      expect(result.speciality).to.equal('123456')
       expect(result.user_id).to.equal('123456')
       expect(result.sector_id).to.equal('123456')
       expect(result.hospital_id).to.equal('123456')
