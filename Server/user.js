@@ -9,7 +9,7 @@ require('seneca')()
 .use('_user')
 .listen({
   type:'amqp',
-  pin:'role:user',
+  pin:'role:profile',
   port: process.env.RABBITMQ_PORT,
   username: process.env.RABBITMQ_DEFAULT_USER,
   password: process.env.RABBITMQ_DEFAULT_PASS,

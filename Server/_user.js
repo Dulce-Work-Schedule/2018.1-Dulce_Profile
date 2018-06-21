@@ -1,59 +1,61 @@
 module.exports = function(options){
-  this.add('role:user, cmd:create', function create( msg, respond ) {
+  this.add('role:profile, cmd:create', function create( msg, respond ) {
+    var profile = this.make('profiles')
+    profile.registration = msg.registration
+    profile.user_type = msg.user_type
+    profile.medical_speciality = msg.medical_speciality
+    profile.user_id = msg.user_id
+    profile.sector_id = msg.sector_id
+    profile.hospital_id = msg.hospital_id
 
-    var user = this.make('users')
+    // Validate if user id exists
+    // Validate if sector id exists
+    // Validate if hospital id exists
 
-    user.name = msg.name
-    user.registration = msg.registration
-    user.sector = msg.sector
-    user.hospital = msg.hospital
-    user.password = msg.password
-    user.manager = msg.manager
-
-    user.save$(function(err,user){
-      respond(null, user)
+    profile.save$(function(err,profile){
+      respond(null, profile)
     })
   })
 
-  this.add('role:user, cmd:listById', function listById (msg, respond){
+  this.add('role:profile, cmd:listById', function listById (msg, respond){
 
-    var userId = msg.id;
-    var user = this.make('users')
-    user.load$(userId, function(error, user) {
-      respond(null, user);
+    var profileId = msg.id;
+    var profile = this.make('profiles')
+    profile.load$(profileId, function(error, profile) {
+      respond(null, profile);
     });
   })
 
-  this.add('role:user, cmd:listUser', function listUser(msg, respond){
+  this.add('role:profile, cmd:listUser', function listUser(msg, respond){
 
-    var user = this.make('users');
-    user.list$( { all$: true } , function(error, user){
-      respond(null, user);
+    var profile = this.make('profiles');
+    profile.list$( { all$: true } , function(error, profile){
+      respond(null, profile);
     });
 
 
   })
 
-  .add('role:user, cmd:error', function error(msg, respond){
+  .add('role:profile, cmd:error', function error(msg, respond){
     respond(null, {success:false, message: 'acesso negado'});
   })
 
-  this.add('role:user, cmd:editUser', function(msg, respond){
+  this.add('role:profile, cmd:editUser', function(msg, respond){
 
-    var userId = msg.id;
-    var user = this.make('users')
+    var profileId = msg.id;
+    var profile = this.make('profiles')
 
-    user.load$(userId, function(error, user) {
+    profile.load$(profileId, function(error, profile) {
 
-      user.name = msg.name
-      user.registration = msg.registration
-      user.sector = msg.sector
-      user.hospital = msg.hospital
-      user.password = msg.password
-      user.manager = msg.manager
+      profile.name = msg.name
+      profile.registration = msg.registration
+      profile.sector = msg.sector
+      profile.hospital = msg.hospital
+      profile.password = msg.password
+      profile.manager = msg.manager
 
-      user.save$(function(err,user){
-        respond( null, user)
+      profile.save$(function(err,profile){
+        respond( null, profile)
       });
     });
   })
