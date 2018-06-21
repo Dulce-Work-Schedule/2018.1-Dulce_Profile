@@ -72,4 +72,34 @@ describe('Create user', function() {
       })
     })
   })
+
+  it('User entity list', function(fin){
+    var seneca = test_user_seneca(fin)
+
+    seneca.act({
+      role: 'profile',
+      cmd: 'create',
+      registration : "140145575",
+      user_type : "employee",
+      speciality : "Reprovar",
+      user_id : "123456",
+      sector_id : "654312",
+      hospital_id : "123456"
+    }, function(err, result){
+      seneca.act({
+        role: 'profile',
+        cmd: 'list',
+        user_id : result.user_id
+      }, function(err, result){
+        expect(result[0].registration).to.equal('140145575')
+        expect(result[0].user_type).to.equal('employee')
+        expect(result[0].speciality).to.equal("Reprovar")
+        expect(result[0].user_id).to.equal('123456')
+        expect(result[0].sector_id).to.equal('654312')
+        expect(result[0].hospital_id).to.equal('123456')
+        fin()
+      })
+    })
+  })
+
 });

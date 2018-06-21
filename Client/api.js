@@ -31,7 +31,6 @@ function validate_user_type(field, result){
 user_types = ["sector_manager", "employee", "institution_manager"];
 
 module.exports = function api(options) {
-
   this.add('role:api,path:create', function (msg, respond) {
     var sector_id = {
       verbose: 'Setor',
@@ -90,25 +89,38 @@ module.exports = function api(options) {
     }
   })
 
-  this.add('role:api,path:listById',function(msg, respond){
+//##############################################################################
 
-    var id = msg.args.query.id
+  this.add('role:api,path:list',function(msg, respond){
+    result = {};
+    var user_id = {
+      verbose: 'Usuário',
+      field_name: 'user_id'
+    }
+    user_id.value = msg.args.query.user_id
 
-    this.act('role:profile, cmd:listById', {
-      id: id
-    }, respond)
+    result = validate_id(user_id, result)
 
+    if (Object.entries(result)[0]) {
+      console.log("Result:");
+      console.log(result);
+      result.success = false;
+      respond(null, result)
+    // else, everything sucess
+    } else {
+      this.act('role:profile, cmd:list', {
+        user_id: user_id.value
+      }, respond)
+    }
   });
 
-  this.add('role:api,path:listUser', function(msg, respond){
-    this.act('role:profile, cmd:listUser',{}, respond)
-
-  });
+///##############################################################################
 
   this.add('role:api,path:error', function(msg, respond){
     this.act('role:profile, cmd:error',{}, respond)
-
   });
+
+//##############################################################################
 
 this.add('role:api,path:edit', function(msg, respond){
   var sector_id = {
@@ -175,6 +187,8 @@ this.add('role:api,path:edit', function(msg, respond){
   }
 });
 
+//##############################################################################
+
   this.add('init:api', function (msg, respond) {
 
     this.act('role:web',{ routes: {
@@ -182,11 +196,7 @@ this.add('role:api,path:edit', function(msg, respond){
       pin:    'role:api,path:*',
       map: {
         create: { POST:true },
-        listById: { GET:true,
-                    auth: {
-                      strategy: 'jwt',
-                      fail: '/api/profile/error',
-                    }
+        list: { GET:true
         },
         listUser: { GET: true,
                     auth: {
