@@ -114,6 +114,31 @@ module.exports = function api(options) {
     }
   });
 
+  //##############################################################################
+
+  this.add('role:api,path:view',function(msg, respond){
+    result = {};
+    var profile_id = {
+      verbose: 'Perfil',
+      field_name: 'profile_id'
+    }
+    profile_id.value = msg.args.query.profile_id
+
+    result = validate_id(profile_id, result)
+
+    if (Object.entries(result)[0]) {
+      console.log("Result:");
+      console.log(result);
+      result.success = false;
+      respond(null, result)
+    // else, everything sucess
+    } else {
+      this.act('role:profile, cmd:view', {
+        profile_id: profile_id.value
+      }, respond)
+    }
+  });
+
 ///##############################################################################
 
   this.add('role:api,path:error', function(msg, respond){
@@ -197,6 +222,8 @@ this.add('role:api,path:edit', function(msg, respond){
       map: {
         create: { POST:true },
         list: { GET:true
+        },
+        view: { GET:true
         },
         listUser: { GET: true,
                     auth: {
